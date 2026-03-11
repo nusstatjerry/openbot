@@ -55,3 +55,36 @@
     </tr>
   </table>
 </div>
+
+
+### 打包便携运行包（不提交二进制到仓库）
+如果你需要生成可分发压缩包，请在仓库根目录执行：
+
+```bash
+bash tools/package-portable.sh
+```
+
+默认会生成 `openbot-portable.zip`，包含：
+- `src/Bin/`（`Bot.exe` 与依赖）
+- `src/data/`（运行数据）
+- `README.md`
+
+
+### 大语言模型配置
+在软件设置页（机器人选项）可以直接配置以下参数：
+- `BaseUrl`：模型服务地址（可留空使用默认 OpenAI 地址）
+- `ApiKey`：你的模型服务密钥
+- `模型名称`：例如 `gpt-4o-mini`、`deepseek-chat`、`qwen-plus` 等
+- `SystemPrompt`：系统提示词
+
+保存后会按最新配置初始化 AI 客户端。
+
+
+#### 豆包（火山方舟）示例
+可在“机器人选项”里按下面填写：
+- BaseUrl：`https://ark.cn-beijing.volces.com/api/v3`
+- ApiKey：你的方舟 API Key（请勿提交到仓库）
+- 模型名称：填写你在方舟创建的接入点/模型名（例如 `doubao-1-5-lite-32k-250115`）
+- SystemPrompt：按你的业务场景填写
+
+> 提示：如果你误填了 `.../chat/completions`，程序会自动归一化为服务根地址。
