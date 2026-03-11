@@ -6,10 +6,7 @@ using OpenAI.Chat;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Interop;
 
 namespace Bot.ChromeNs
 {
@@ -38,6 +35,10 @@ namespace Bot.ChromeNs
                                 });
             }
             systemPrompt = Params.Robot.GetSystemPrompt();
+            if (string.IsNullOrWhiteSpace(systemPrompt))
+            {
+                systemPrompt = "你是一个专业的电商客服助手，请基于用户问题给出简洁、礼貌且可执行的回复。";
+            }
         }
 
 
@@ -70,9 +71,23 @@ namespace Bot.ChromeNs
             {
                 messages.Add(ChatMessage.CreateUserMessage(question));
             }
-            var completion = ChatClient.CompleteChat(messages);
-            var completionContent = completion.GetRawResponse().Content.ToString();
-            var answer = JObject.Parse(completionContent)["choices"][0]["message"]["content"].ToString();
+            string answer;
+            try
+            {
+                var completion = ChatClient.CompleteChat(messages);
+                var completionContent = completion.GetRawResponse().Content.ToString();
+                answer = JObject.Parse(completionContent)["choices"]?[0]?["message"]?["content"]?.ToString();
+            }
+            catch (Exception ex)
+            {
+                return "错误：调用AI服务失败（" + ex.Message + "）";
+            }
+
+            if (string.IsNullOrWhiteSpace(answer))
+            {
+                return "错误：AI服务返回了空结果，请检查模型配置或稍后重试";
+            }
+
             messages.Add(ChatMessage.CreateAssistantMessage(answer));
             buyerChatMessages.AddOrUpdate(key, id => messages, (k, v) => messages);
             return answer;

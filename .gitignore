@@ -183,3 +183,5 @@ src/.vs/
 
 # Log file
 *.txt
+# Portable package artifact
+openbot-portable.zip

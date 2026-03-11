@@ -55,3 +55,16 @@
     </tr>
   </table>
 </div>
+
+
+### 打包便携运行包（不提交二进制到仓库）
+如果你需要生成可分发压缩包，请在仓库根目录执行：
+
+```bash
+bash tools/package-portable.sh
+```
+
+默认会生成 `openbot-portable.zip`，包含：
+- `src/Bin/`（`Bot.exe` 与依赖）
+- `src/data/`（运行数据）
+- `README.md`
