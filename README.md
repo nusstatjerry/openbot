@@ -88,3 +88,17 @@ bash tools/package-portable.sh
 - SystemPrompt：按你的业务场景填写
 
 > 提示：如果你误填了 `.../chat/completions`，程序会自动归一化为服务根地址。
+
+
+### Windows 双击即启动
+如果你已经能在 `src/Bin/` 目录直接运行，那么确实不一定需要再次打包。
+
+你可以使用以下两种更方便的方式：
+- 直接双击：`src/Bin/启动灵桥客服.cmd`
+- 生成桌面图标（推荐）：在 PowerShell 执行
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/create-windows-shortcut.ps1
+```
+
+执行后会在桌面生成“灵桥客服”快捷方式（图标来自 `Bot.exe`）。

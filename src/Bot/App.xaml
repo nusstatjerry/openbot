@@ -48,6 +48,12 @@
                 <Setter Property="BorderBrush" Value="#FFD1D5DB" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Background" Value="White" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Style.Triggers>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="#FF3B82F6" />
+                    </Trigger>
+                </Style.Triggers>
             </Style>
             <Style TargetType="{x:Type ComboBox}">
                 <Setter Property="Padding" Value="4,2" />
@@ -69,6 +75,18 @@
                 <Setter Property="BorderBrush" Value="#FFBFDBFE" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Foreground" Value="#FF1D4ED8" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FFDBEAFE" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#FFBFDBFE" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.65" />
+                    </Trigger>
+                </Style.Triggers>
             </Style>
             <ControlTemplate x:Key="tmplError">
                 <Border BorderBrush="#FFFF0000" BorderThickness="1">
