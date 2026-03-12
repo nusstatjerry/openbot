@@ -1,6 +1,5 @@
 
 
-
 # 🚀千牛客服机器人
 
 专为淘宝千牛打造的AI客服机器人，实现千牛7×24小时自动化值守，接入deepseek，阿里通义千问AI大模型
@@ -62,9 +61,3 @@
 
 ```bash
 bash tools/package-portable.sh
-```
-
-默认会生成 `openbot-portable.zip`，包含：
-- `src/Bin/`（`Bot.exe` 与依赖）
-- `src/data/`（运行数据）
-- `README.md`

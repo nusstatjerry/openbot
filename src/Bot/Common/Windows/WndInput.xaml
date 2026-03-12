@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Bot.Common.Windows"
-	Title="WndInput"
+	Title="灵桥客服输入"
 	Width="400"
 	SizeToContent="Height"
 	ResizeMode="CanMinimize">
