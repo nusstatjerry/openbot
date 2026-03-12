@@ -17,7 +17,7 @@ namespace Bot.Automation.ChatDeskNs.Automators
         {
             get
             {
-                return "千牛接待台";
+                return "千牛接待台|接待台|客服";
             }
         }
 
@@ -29,13 +29,23 @@ namespace Bot.Automation.ChatDeskNs.Automators
         }
 
 
+        private static readonly string[] QianniuProcessNames = new[]
+        {
+            "AliWorkbench",
+            "qianniu",
+            "Qianniu"
+        };
+
         private static HashSet<int> GetAliWorkbenchPids()
         {
             var pids = new HashSet<int>();
-            var aliWorkbenchPs = Process.GetProcessesByName("AliWorkbench");
-            foreach (var p in aliWorkbenchPs.xSafeForEach())
+            foreach (var processName in QianniuProcessNames)
             {
-                pids.Add(p.Id);
+                var aliWorkbenchPs = Process.GetProcessesByName(processName);
+                foreach (var p in aliWorkbenchPs.xSafeForEach())
+                {
+                    pids.Add(p.Id);
+                }
             }
             return pids;
         }
@@ -61,20 +71,28 @@ namespace Bot.Automation.ChatDeskNs.Automators
             return (currenrQNChatWnd, closedChatWnd);
         }
 
-        private string GetWndTitle(int pid, out int hwnd)
+		private string GetWndTitle(int pid, out int hwnd)
 		{
 			var t = string.Empty;
 			var htmp = 0;
 			try
 			{
-			    WinApi.FindAllDesktopWindowByClassNameAndTitlePattern("Qt5152QWindowIcon", this.ChatWindowTitlePattern, (qnHwnd, title) =>
+			    foreach (var className in GetCandidateWindowClassNames())
                 {
-                    if (WinApi.IsVisible(qnHwnd))
+                    WinApi.FindAllDesktopWindowByClassNameAndTitlePattern(className, this.ChatWindowTitlePattern, (qnHwnd, title) =>
                     {
-                        t = title;
-                        htmp = qnHwnd;
+                        if (WinApi.IsVisible(qnHwnd))
+                        {
+                            t = title;
+                            htmp = qnHwnd;
+                        }
+                    }, pid);
+
+                    if (htmp != 0)
+                    {
+                        break;
                     }
-                }, pid);
+                }
 			}
 			catch (Exception e)
 			{
@@ -83,5 +101,12 @@ namespace Bot.Automation.ChatDeskNs.Automators
 			hwnd = htmp;
 			return t;
 		}
+
+        private static IEnumerable<string> GetCandidateWindowClassNames()
+        {
+            yield return "Qt5152QWindowIcon";
+            yield return "Qt5QWindowIcon";
+            yield return "Qt6QWindowIcon";
+        }
     }
 }

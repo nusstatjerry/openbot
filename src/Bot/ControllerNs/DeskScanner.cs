@@ -86,13 +86,13 @@ namespace Bot.ControllerNs
                 if (!_hadDetectSellerEver && !_hadTipNoSellerEver)
                 {
                     var msg = string.Empty;
-                    if (Process.GetProcessesByName("AliWorkbench").Length < 1)
+                    if (!HasQianniuProcess())
                     {
                         msg = string.Format("需要打开千牛【接待窗口】,{0}才能起作用", Params.AppName);
                     }
                     else
                     {
-                        msg = string.Format("需要运行千牛，并打开接待窗口，{0}才能起作用!!", Params.AppName);
+                        msg = string.Format("已检测到千牛进程，但未匹配到接待窗口。请切换到【接待台/客服】标签后重试，{0}才能起作用。", Params.AppName);
                     }
                     _hadTipNoSellerEver = true;
                     MsgBox.ShowTrayTip(msg, "没有检测到【千牛接待窗口】", 30);
@@ -102,6 +102,21 @@ namespace Bot.ControllerNs
             {
                 _hadDetectSellerEver = true;
             }
+        }
+
+
+        private static bool HasQianniuProcess()
+        {
+            var names = new[] { "AliWorkbench", "qianniu", "Qianniu" };
+            foreach (var name in names)
+            {
+                if (Process.GetProcessesByName(name).Length > 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected override void CleanUp_Managed_Resources()
