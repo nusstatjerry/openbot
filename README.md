@@ -102,3 +102,12 @@ powershell -ExecutionPolicy Bypass -File tools/create-windows-shortcut.ps1
 ```
 
 执行后会在桌面生成“灵桥客服”快捷方式（图标来自 `Bot.exe`）。
+
+
+### 界面优化说明（最新）
+- 默认字体：`Microsoft YaHei UI`（Windows 兼容）
+- 文本框：聚焦时高亮边框，输入状态更清晰
+- 按钮：悬停 / 按下 / 禁用态更明显
+- 列表与分组框：统一浅色边框与留白，视觉更简洁
+
+以上优化不影响原有业务功能与启动方式。
