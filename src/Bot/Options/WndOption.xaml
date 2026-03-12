@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:Bot.Options" 
     xmlns:sb="clr-namespace:Delay;assembly=SplitButtonWpf"
 	ew:Closed="EtWindow_Closed"
-	ew:Title="设置"
+	ew:Title="灵桥客服设置"
 	SizeToContent="Height"
 	Width="600"
 	MinHeight="400">

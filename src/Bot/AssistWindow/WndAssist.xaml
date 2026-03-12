@@ -9,7 +9,7 @@
     xmlns:fa="clr-namespace:BotLib.Wpf.Controls;assembly=BotLib" 
     xmlns:ctlp="clr-namespace:Bot.AssistWindow.Widget" 
     xmlns:sb="clr-namespace:Delay;assembly=SplitButtonWpf"
-	Title="AssistMainWnd"
+	Title="灵桥客服"
 	AllowsTransparency="True"
 	Background="#00FFFFFF"
 	WindowStyle="None"
